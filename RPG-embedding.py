@@ -17,8 +17,8 @@ class MyConfig(object):
 MY_CONFIG = MyConfig()
 
 ## Atlas settings
-MY_CONFIG.DB_NAME = "rag1"
-MY_CONFIG.COLLECTION_NAME = "10k_local"
+MY_CONFIG.DB_NAME = "LORT_Bert"
+MY_CONFIG.COLLECTION_NAME = "LORT_Bert"
 MY_CONFIG.EMBEDDING_ATTRIBUTE = "embedding_local"
 MY_CONFIG.INDEX_NAME = "idx_embedding_local"
 
@@ -27,7 +27,7 @@ MY_CONFIG.INDEX_NAME = "idx_embedding_local"
 ## Option 2 : large model - about 1.34 GB
 ## See Step-12 for more details
 
-MY_CONFIG.EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
+MY_CONFIG.EMBEDDING_MODEL = "bert-base-uncased"
 
 print("DB_NAME: ", MY_CONFIG.DB_NAME)
 
@@ -84,3 +84,31 @@ vector_store = MongoDBAtlasVectorSearch(
     # text_key = 'text', metadata_= 'metadata',
 )
 storage_context = StorageContext.from_defaults(vector_store=vector_store)
+
+# from llama_index.readers.json import JSONReader
+
+# reader = JSONReader()
+
+# documents = reader.load_data("data/cys-pktdc.json")
+
+# print("✅ Loaded data from JSON file")
+
+# print(documents[0].get_text())
+
+from llama_index.core import SimpleDirectoryReader
+
+
+## This reads one doc
+# docs = SimpleDirectoryReader(
+#     input_files=["./data/10k/uber_2021.pdf"]
+# ).load_data()
+
+## here we read entire directory content
+docs = SimpleDirectoryReader(input_dir="./data").load_data()
+
+print(len(docs))
+print(docs[0])
+
+from llama_index.core import VectorStoreIndex
+
+index = VectorStoreIndex.from_documents(docs, storage_context=storage_context)
