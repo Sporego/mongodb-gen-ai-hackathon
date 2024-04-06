@@ -17,8 +17,8 @@ class MyConfig(object):
 MY_CONFIG = MyConfig()
 
 ## Atlas settings
-MY_CONFIG.DB_NAME = "LORT_Bert"
-MY_CONFIG.COLLECTION_NAME = "LORT_Bert"
+MY_CONFIG.DB_NAME = "RPG"
+MY_CONFIG.COLLECTION_NAME = "rpg_local"
 MY_CONFIG.EMBEDDING_ATTRIBUTE = "embedding_local"
 MY_CONFIG.INDEX_NAME = "idx_embedding_local"
 
@@ -27,7 +27,7 @@ MY_CONFIG.INDEX_NAME = "idx_embedding_local"
 ## Option 2 : large model - about 1.34 GB
 ## See Step-12 for more details
 
-MY_CONFIG.EMBEDDING_MODEL = "bert-base-uncased"
+MY_CONFIG.EMBEDDING_MODEL = "PocketDoc/Dans-AdventurousWinds-Mk2-7b"
 
 print("DB_NAME: ", MY_CONFIG.DB_NAME)
 
